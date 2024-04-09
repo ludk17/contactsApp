@@ -51,7 +51,7 @@ public class ContactItemAdapter extends RecyclerView.Adapter<ContactItemAdapter.
 
         itemLayoutContact.setOnClickListener(v -> {
             Intent intent = new Intent(view.getContext(), ContactDetailActivity.class);
-            String sData = new Gson().toJson(data);
+            String sData = new Gson().toJson(data); // convierte el objeto en un string JSON
             intent.putExtra("contact", sData);
             view.getContext().startActivity(intent);
         });

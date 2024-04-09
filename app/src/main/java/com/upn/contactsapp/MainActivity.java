@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.upn.contactsapp.adapters.ContactItemAdapter;
 import com.upn.contactsapp.entities.Contact;
 
@@ -16,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final List<Contact> mData = new ArrayList<>();
     private RecyclerView mRvContacts;
+    private FloatingActionButton mbtnCreateContact;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +37,10 @@ public class MainActivity extends AppCompatActivity {
         mData.add(new Contact("Luis", "Mendoza", "9999999"));
 
         mRvContacts = findViewById(R.id.rvContacts);
+        mbtnCreateContact = findViewById(R.id.btnCreateContact);
 
         setUpRecyclerView();
+        setUpBtnCreateContact();
     }
 
     private void setUpRecyclerView() {
@@ -44,5 +49,12 @@ public class MainActivity extends AppCompatActivity {
         // configurar RV y agregar elementos en la lista
         ContactItemAdapter adapter = new ContactItemAdapter(mData);
         mRvContacts.setAdapter(adapter); //Me permite indicar que elementos debe mostrar el RV
+    }
+
+    private void setUpBtnCreateContact() {
+        mbtnCreateContact.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), ContactFormActivity.class);
+            startActivity(intent);
+        });
     }
 }

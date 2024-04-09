@@ -25,7 +25,7 @@ public class ContactDetailActivity extends AppCompatActivity {
 
         Log.i("MAIN_APP", sData);
 
-        mContact = new Gson().fromJson(sData, Contact.class);
+        mContact = new Gson().fromJson(sData, Contact.class); // convierte el string JSON a un objeto
 
         setUpView();
     }
