@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
         // set DE Datos
         mData.add(new Contact("Luis", "Mendoza", "9999999"));
-        mData.add(new Contact("Lionel", "Messi", "9999999"));
-        mData.add(new Contact("Cristiano", "Ronaldo", "9999999"));
+        mData.add(new Contact("Lionel", "Messi", "9999999", "https://cdn-icons-png.flaticon.com/512/805/805404.png"));
+        mData.add(new Contact("Cristiano", "Ronaldo", "9999999", "https://cdn.icon-icons.com/icons2/1371/PNG/512/cristianoronaldo_90805.png"));
         mData.add(new Contact("Luis", "Mendoza", "9999999"));
         mData.add(new Contact("Luis", "Mendoza", "9999999"));
         mData.add(new Contact("Luis", "Mendoza", "9999999"));

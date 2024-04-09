@@ -3,11 +3,13 @@ package com.upn.contactsapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 import com.upn.contactsapp.entities.Contact;
 
 public class ContactDetailActivity extends AppCompatActivity {
@@ -32,9 +34,14 @@ public class ContactDetailActivity extends AppCompatActivity {
         TextView tvContactName = findViewById(R.id.tvContactName);
         TextView tvContactLastName = findViewById(R.id.tvContactLastName);
         TextView tvContactPhoneNumber = findViewById(R.id.tvContactPhoneNumber);
+        ImageView ivAvatar = findViewById(R.id.ivAvatar);
 
         tvContactName.setText(mContact.name);
         tvContactLastName.setText(mContact.lastName);
         tvContactPhoneNumber.setText(mContact.phoneNumber);
+
+        if (mContact.imageUrl != null) {
+            Picasso.get().load(mContact.imageUrl).into(ivAvatar);
+        }
     }
 }
