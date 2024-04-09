@@ -1,21 +1,26 @@
 package com.upn.contactsapp.adapters;
 
-
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.upn.contactsapp.ContactDetailActivity;
 import com.upn.contactsapp.R;
+import com.upn.contactsapp.entities.Contact;
 
 import java.util.List;
 
 public class ContactItemAdapter extends RecyclerView.Adapter<ContactItemAdapter.ContactItemViewHolder> {
-    private List<String> mData;
-    public ContactItemAdapter(List<String> data) {
+    private final List<Contact> mData;
+    public ContactItemAdapter(List<Contact> data) {
         this.mData = data;
     }
 
@@ -31,10 +36,27 @@ public class ContactItemAdapter extends RecyclerView.Adapter<ContactItemAdapter.
     @Override
     public void onBindViewHolder(@NonNull ContactItemViewHolder holder, int position) {
         View view = holder.itemView;
-        String data = mData.get(position);
+        Contact data = mData.get(position);
 
         TextView tvContactName = view.findViewById(R.id.tvContactName);
-        tvContactName.setText(data);
+        TextView tvContactLastName = view.findViewById(R.id.tvContactLastName);
+        TextView tvContactPhoneNumber = view.findViewById(R.id.tvContactPhoneNumber);
+
+        tvContactName.setText(data.name);
+        tvContactLastName.setText(data.lastName);
+        tvContactPhoneNumber.setText(data.phoneNumber);
+
+
+        LinearLayout itemLayoutContact = view.findViewById(R.id.itemLayoutContact);
+
+        itemLayoutContact.setOnClickListener(v -> {
+            Intent intent = new Intent(view.getContext(), ContactDetailActivity.class);
+            String sData = new Gson().toJson(data);
+            intent.putExtra("contact", sData);
+            view.getContext().startActivity(intent);
+        });
+
+
     }
 
     @Override
@@ -42,7 +64,7 @@ public class ContactItemAdapter extends RecyclerView.Adapter<ContactItemAdapter.
         return mData.size();
     }
 
-    public class ContactItemViewHolder extends RecyclerView.ViewHolder {
+    public static class ContactItemViewHolder extends RecyclerView.ViewHolder {
 
         public ContactItemViewHolder(@NonNull View itemView) {
             super(itemView);

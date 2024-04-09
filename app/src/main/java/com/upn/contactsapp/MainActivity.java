@@ -7,13 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import com.upn.contactsapp.adapters.ContactItemAdapter;
+import com.upn.contactsapp.entities.Contact;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<String> mData = new ArrayList<>();
+    private final List<Contact> mData = new ArrayList<>();
     private RecyclerView mRvContacts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,26 +22,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // set DE Datos
-        mData.add("Dato 1");
-        mData.add("Dato 2");
-        mData.add("Dato 3");
-        mData.add("Dato 4");
-        mData.add("Dato 5");
-        mData.add("Dato 6");
-        mData.add("Dato 7");
-        mData.add("Dato 8");
-        mData.add("Dato 9");
-        mData.add("Dato 10");
-
-
+        mData.add(new Contact("Luis", "Mendoza", "9999999"));
+        mData.add(new Contact("Lionel", "Messi", "9999999"));
+        mData.add(new Contact("Cristiano", "Ronaldo", "9999999"));
+        mData.add(new Contact("Luis", "Mendoza", "9999999"));
+        mData.add(new Contact("Luis", "Mendoza", "9999999"));
+        mData.add(new Contact("Luis", "Mendoza", "9999999"));
+        mData.add(new Contact("Luis", "Mendoza", "9999999"));
+        mData.add(new Contact("Luis", "Mendoza", "9999999"));
+        mData.add(new Contact("Luis", "Mendoza", "9999999"));
+        mData.add(new Contact("Luis", "Mendoza", "9999999"));
 
         mRvContacts = findViewById(R.id.rvContacts);
+
+        setUpRecyclerView();
+    }
+
+    private void setUpRecyclerView() {
+
         mRvContacts.setLayoutManager(new LinearLayoutManager(this));
-
-
-        // configurar RV y añadir elementos en la lista
+        // configurar RV y agregar elementos en la lista
         ContactItemAdapter adapter = new ContactItemAdapter(mData);
-        mRvContacts.setAdapter(adapter); //Me permite indicar que elemntos debe mostrar el RV
-
+        mRvContacts.setAdapter(adapter); //Me permite indicar que elementos debe mostrar el RV
     }
 }
