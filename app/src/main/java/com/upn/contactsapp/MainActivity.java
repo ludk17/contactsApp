@@ -6,17 +6,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.upn.contactsapp.adapters.ContactItemAdapter;
 import com.upn.contactsapp.entities.Contact;
+import com.upn.contactsapp.services.IContactService;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class MainActivity extends AppCompatActivity {
 
-    private final List<Contact> mData = new ArrayList<>();
+    private List<Contact> mData = new ArrayList<>();
     private RecyclerView mRvContacts;
     private FloatingActionButton mbtnCreateContact;
     @Override
@@ -24,23 +32,38 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // set DE Datos
-        mData.add(new Contact("Luis", "Mendoza", "9999999"));
-        mData.add(new Contact("Lionel", "Messi", "9999999", "https://cdn-icons-png.flaticon.com/512/805/805404.png"));
-        mData.add(new Contact("Cristiano", "Ronaldo", "9999999", "https://cdn.icon-icons.com/icons2/1371/PNG/512/cristianoronaldo_90805.png"));
-        mData.add(new Contact("Luis", "Mendoza", "9999999"));
-        mData.add(new Contact("Luis", "Mendoza", "9999999"));
-        mData.add(new Contact("Luis", "Mendoza", "9999999"));
-        mData.add(new Contact("Luis", "Mendoza", "9999999"));
-        mData.add(new Contact("Luis", "Mendoza", "9999999"));
-        mData.add(new Contact("Luis", "Mendoza", "9999999"));
-        mData.add(new Contact("Luis", "Mendoza", "9999999"));
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://661d24b4e7b95ad7fa6c43d1.mockapi.io")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        mRvContacts = findViewById(R.id.rvContacts);
-        mbtnCreateContact = findViewById(R.id.btnCreateContact);
+        IContactService service = retrofit.create(IContactService.class);
+        Call<List<Contact>> callGetContacts = service.getContacts();
 
-        setUpRecyclerView();
-        setUpBtnCreateContact();
+
+        callGetContacts.enqueue(new Callback<List<Contact>>() {
+            @Override
+            public void onResponse(Call<List<Contact>> call, Response<List<Contact>> response) {
+
+                if (response.code() == 200) {
+                    mData = response.body();
+
+                    mRvContacts = findViewById(R.id.rvContacts);
+                    mbtnCreateContact = findViewById(R.id.btnCreateContact);
+
+                    setUpRecyclerView();
+                    setUpBtnCreateContact();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Contact>> call, Throwable throwable) {
+                Toast.makeText(MainActivity.this, "No se pudo conectar sa servidor", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
     }
 
     private void setUpRecyclerView() {
