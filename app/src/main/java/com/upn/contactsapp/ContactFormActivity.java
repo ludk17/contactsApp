@@ -1,5 +1,6 @@
 package com.upn.contactsapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -48,7 +49,10 @@ public class ContactFormActivity extends AppCompatActivity {
             service.create(contact).enqueue(new Callback<Contact>() {
                 @Override
                 public void onResponse(Call<Contact> call, Response<Contact> response) {
-                    Toast.makeText(ContactFormActivity.this, "Se creo contacto correctamente", Toast.LENGTH_SHORT).show();
+                    if (response.isSuccessful()) {
+                        Toast.makeText(ContactFormActivity.this, "Se creo contacto correctamente", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
                 }
 
                 @Override
