@@ -32,16 +32,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Instanciar Retrofit
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://661d24b4e7b95ad7fa6c43d1.mockapi.io")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
+        // Instanciar IContactService
         IContactService service = retrofit.create(IContactService.class);
-        Call<List<Contact>> callGetContacts = service.getContacts();
 
-
-        callGetContacts.enqueue(new Callback<List<Contact>>() {
+        service.getAll("Lionel").enqueue(new Callback<List<Contact>>() {
             @Override
             public void onResponse(Call<List<Contact>> call, Response<List<Contact>> response) {
 
@@ -61,8 +61,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "No se pudo conectar sa servidor", Toast.LENGTH_SHORT).show();
             }
         });
-
-
 
     }
 
