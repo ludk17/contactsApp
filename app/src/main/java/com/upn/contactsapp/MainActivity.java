@@ -1,12 +1,16 @@
 package com.upn.contactsapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -28,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
     private List<Contact> mData = new ArrayList<>();
     private RecyclerView mRvContacts;
     private FloatingActionButton mbtnCreateContact;
+    private ContactItemAdapter mAdapter;
+
+    private SearchView mEtSearch;
+    private int mPage = 1;
+    private final int mLimit = 15;
+    private String search = "";
 
     IContactService service;
 
@@ -36,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mEtSearch = findViewById(R.id.etSearch);
         setUpBtnCreateContact();
+        setUpRecyclerView();
 
         Log.e("MAIN_APP", "onCreate");
 
@@ -48,8 +60,47 @@ public class MainActivity extends AppCompatActivity {
 
         // Instanciar IContactService
         service = retrofit.create(IContactService.class);
+        loadData(search);
 
 
+        mEtSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.i("MAIN_APP search:", query);
+                int size = mData.size();
+                mData.clear();
+                mAdapter.notifyItemRangeRemoved(0, size);
+                search = query;
+                mPage = 1;
+                loadData(search);
+                mEtSearch.clearFocus();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+    }
+
+    private void loadData(String name) {
+        name = name == null ? "" : name;
+        service.getAll(name, mLimit, mPage).enqueue(new Callback<List<Contact>>() {
+            @Override
+            public void onResponse(Call<List<Contact>> call, Response<List<Contact>> response) {
+
+                if (response.code() == 200 && response.body() != null && response.body().size() > 0) {
+                    mData.addAll(response.body());
+                    mAdapter.notifyItemInserted(mData.size() - 1);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Contact>> call, Throwable throwable) {
+                Toast.makeText(MainActivity.this, "No se pudo conectar sa servidor", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -62,22 +113,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.e("MAIN_APP", "onResume");
-        service.getAll().enqueue(new Callback<List<Contact>>() {
-            @Override
-            public void onResponse(Call<List<Contact>> call, Response<List<Contact>> response) {
-
-                if (response.code() == 200) {
-                    mData = response.body();
-                    mRvContacts = findViewById(R.id.rvContacts);
-                    setUpRecyclerView();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Contact>> call, Throwable throwable) {
-                Toast.makeText(MainActivity.this, "No se pudo conectar sa servidor", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override
@@ -99,11 +134,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpRecyclerView() {
-
+        mRvContacts = findViewById(R.id.rvContacts);
         mRvContacts.setLayoutManager(new LinearLayoutManager(this));
         // configurar RV y agregar elementos en la lista
-        ContactItemAdapter adapter = new ContactItemAdapter(mData);
-        mRvContacts.setAdapter(adapter); //Me permite indicar que elementos debe mostrar el RV
+        mAdapter = new ContactItemAdapter(mData);
+        mRvContacts.setAdapter(mAdapter); //Me permite indicar que elementos debe mostrar el RV
+
+        mRvContacts.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+
+            }
+        });
     }
 
     private void setUpBtnCreateContact() {
