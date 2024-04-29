@@ -27,7 +27,7 @@
        android:id="@+id/btnCreateContact"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:layout_marginTop="100dp"
+       android:layout_marginTop="-60dp"
        android:src="@android:drawable/btn_plus"
        app:layout_constraintTop_toBottomOf="parent"
        app:layout_constraintEnd_toEndOf="parent"

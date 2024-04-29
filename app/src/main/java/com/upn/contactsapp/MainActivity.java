@@ -79,7 +79,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                return false;
+                if (newText.isEmpty()) {
+                    int size = mData.size();
+                    mData.clear();
+                    mAdapter.notifyItemRangeRemoved(0, size);
+                    search = "";
+                    mPage = 1;
+                    loadData(search);
+                    mEtSearch.clearFocus();
+                }
+                return true;
             }
         });
     }
