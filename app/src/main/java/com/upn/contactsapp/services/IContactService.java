@@ -17,7 +17,7 @@ import retrofit2.http.Query;
 public interface IContactService {
 
     @GET("/contacts")
-    Call<List<Contact>> getAll();
+    Call<List<Contact>> getAll(@Query("name") String name, @Query("limit") int limit, @Query("page") int page);
     @GET("/contacts")
     Call<List<Contact>> getAll(@Query("name") String name);
 
