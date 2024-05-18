@@ -14,8 +14,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
 import com.upn.contactsapp.adapters.ContactItemAdapter;
 import com.upn.contactsapp.entities.Contact;
+import com.upn.contactsapp.main.AppDatabase;
 import com.upn.contactsapp.services.IContactService;
 
 import java.util.ArrayList;
@@ -42,13 +44,16 @@ public class MainActivity extends AppCompatActivity {
     IContactService service;
 
     private Retrofit retrofit;
+    private AppDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mEtSearch = findViewById(R.id.etSearch);
         setUpBtnCreateContact();
         setUpRecyclerView();
+        db = AppDatabase.getInstance(this);
 
         Log.e("MAIN_APP", "onCreate");
 
@@ -63,53 +68,68 @@ public class MainActivity extends AppCompatActivity {
         loadData(search);
 
 
-        mEtSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Log.i("MAIN_APP search:", query);
-                int size = mData.size();
-                mData.clear();
-                mAdapter.notifyItemRangeRemoved(0, size);
-                search = query;
-                mPage = 1;
-                loadData(search);
-                mEtSearch.clearFocus();
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if (newText.isEmpty()) {
-                    int size = mData.size();
-                    mData.clear();
-                    mAdapter.notifyItemRangeRemoved(0, size);
-                    search = "";
-                    mPage = 1;
-                    loadData(search);
-                    mEtSearch.clearFocus();
-                }
-                return true;
-            }
-        });
+//        mEtSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                Log.i("MAIN_APP search:", query);
+//                int size = mData.size();
+//                mData.clear();
+//                mAdapter.notifyItemRangeRemoved(0, size);
+//                search = query;
+//                mPage = 1;
+//                loadData(search);
+//                mEtSearch.clearFocus();
+//                return true;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                if (newText.isEmpty()) {
+//                    int size = mData.size();
+//                    mData.clear();
+//                    mAdapter.notifyItemRangeRemoved(0, size);
+//                    search = "";
+//                    mPage = 1;
+//                    loadData(search);
+//                    mEtSearch.clearFocus();
+//                }
+//                return true;
+//            }
+//        });
     }
 
     private void loadData(String name) {
         name = name == null ? "" : name;
+
+
         service.getAll(name, mLimit, mPage).enqueue(new Callback<List<Contact>>() {
             @Override
             public void onResponse(Call<List<Contact>> call, Response<List<Contact>> response) {
 
                 if (response.code() == 200 && response.body() != null && response.body().size() > 0) {
-                    mData.addAll(response.body());
-                    mAdapter.notifyItemInserted(mData.size() - 1);
+                    updateTableContact(response.body());
+                    refreshAdapter();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Contact>> call, Throwable throwable) {
-                Toast.makeText(MainActivity.this, "No se pudo conectar sa servidor", Toast.LENGTH_SHORT).show();
+                refreshAdapter();
+                //Toast.makeText(MainActivity.this, "No se pudo conectar sa servidor", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void updateTableContact(List<Contact> contacts) {
+        db.contactDAO().deleteAll();
+        for (Contact contact: contacts) {
+            db.contactDAO().create(contact);
+        }
+    }
+
+    private void refreshAdapter() {
+        mData.addAll(db.contactDAO().getAll());
+        mAdapter.notifyItemInserted(mData.size() - 1);
     }
 
     @Override
