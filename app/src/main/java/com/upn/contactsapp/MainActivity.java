@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SearchView mEtSearch;
     private int mPage = 1;
-    private final int mLimit = 15;
+    private final int mLimit = 100;
     private String search = "";
 
     IContactService service;
@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         // Instanciar IContactService
         service = retrofit.create(IContactService.class);
         loadData(search);
-
 
 //        mEtSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 //            @Override
