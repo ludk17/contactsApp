@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1049414150095",
+    "firebase_url": "https://contactsapp-dcfa8-default-rtdb.firebaseio.com",
+    "project_id": "contactsapp-dcfa8",
+    "storage_bucket": "contactsapp-dcfa8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1049414150095:android:dcec9787e879e3325a94ba",
+        "android_client_info": {
+          "package_name": "com.upn.contactsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCai8d-ppskeXdXkylm3zoV84Be4iiBzpQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
