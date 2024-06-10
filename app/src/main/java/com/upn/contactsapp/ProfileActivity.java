@@ -1,5 +1,7 @@
 package com.upn.contactsapp;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.upn.contactsapp.entities.Profile;
 import com.upn.contactsapp.services.IProfileService;
+
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,7 +51,13 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void setUpPofile() {
-        service.find(1).enqueue(new Callback<Profile>() {
+
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+
+        HashMap<String, String> headers = new HashMap<String, String>();
+        headers.put("Authorization",sharedPref.getString("TOKEN", ""));
+
+        service.find(headers, 1).enqueue(new Callback<Profile>() {
             @Override
             public void onResponse(Call<Profile> call, Response<Profile> response) {
                 if (response.isSuccessful()) {
