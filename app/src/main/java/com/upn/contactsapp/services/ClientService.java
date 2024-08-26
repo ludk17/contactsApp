@@ -12,7 +12,9 @@ import retrofit2.http.Headers;
 
 public interface ClientService {
 
-    @Headers("Accept: application/json")
+//    @Headers("Accept: application/json")
     @GET("/api/v1/clients")
-    Call<Pager<Client>> getAll(@HeaderMap Map<String, String> headers);
+    Call<Pager<Client>> getAll();
+
+
 }

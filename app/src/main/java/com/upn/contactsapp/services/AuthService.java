@@ -10,7 +10,6 @@ import retrofit2.http.POST;
 
 public interface AuthService {
 
-    @Headers("Accept: application/json")
     @POST("/api/v1/auth/login")
     Call<TokenAuth> login(@Body Login login);
 }

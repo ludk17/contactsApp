@@ -23,8 +23,8 @@
         android:theme="@style/Theme.ContactsApp"
         tools:targetApi="31">
         <activity
-            android:name=".ClientActivity"
-            android:exported="true">
+            android:name=".CircleActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,13 +32,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ClientActivity"
+            android:exported="true"></activity>
+        <activity
             android:name=".LoginActivity"
             android:exported="true">
 
         </activity>
         <activity
             android:name=".FirebaseActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
