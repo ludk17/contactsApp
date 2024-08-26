@@ -1,13 +1,12 @@
 package com.upn.contactsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
-import com.upn.contactsapp.entities.Contact;
-import com.upn.contactsapp.entities.Service;
+import com.upn.contactsapp.adapters.ContactAdaptar;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,14 +15,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button button = findViewById(R.id.btnSaludar);
+        RecyclerView rvContacts = findViewById(R.id.rvContacts);
+        rvContacts.setLayoutManager(new LinearLayoutManager(this));
 
+        List<String> elementos = new ArrayList<>();
+        elementos.add("Luis Mendoza");
+        elementos.add("Lionel Messi");
+        elementos.add("Cristiano Ronaldo");
+        elementos.add("Neymar Jr");
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               Toast.makeText(MainActivity.this, "Hola CLase", Toast.LENGTH_SHORT).show();
-            }
-        });
+        ContactAdaptar adaptar = new ContactAdaptar(elementos);
+        rvContacts.setAdapter(adaptar);
     }
 }

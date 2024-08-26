@@ -7,47 +7,11 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Hello World!" />
-
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Hello World!" />
-
-
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btnSaludar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Haz Click" />
+        android:layout_height="match_parent"
+        android:id="@+id/rvContacts"
+        />
 
 
 </LinearLayout>
