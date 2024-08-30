@@ -8,13 +8,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.upn.contactsapp.R;
+import com.upn.contactsapp.entities.Contact;
+
 import java.util.List;
 
 public class ContactAdaptar extends RecyclerView.Adapter<ContactAdaptar.ContactViewHolder> {
 
-    private List<String> data;
+    private List<Contact> data;
 
-    public ContactAdaptar(List<String> data) {
+    public ContactAdaptar(List<Contact> data) {
         this.data = data;
     }
 
@@ -29,11 +31,15 @@ public class ContactAdaptar extends RecyclerView.Adapter<ContactAdaptar.ContactV
 
     @Override
     public void onBindViewHolder(@NonNull ContactViewHolder holder, int position) {
-        String item = data.get(position);
         View view = holder.itemView;
 
+        Contact item = data.get(position);
+
         TextView tvName = view.findViewById(R.id.tvName);
-        tvName.setText(item);
+        TextView tvNumber = view.findViewById(R.id.tvNumber);
+
+        tvName.setText(item.name);
+        tvNumber.setText(item.phone);
     }
 
     @Override
@@ -46,5 +52,5 @@ public class ContactAdaptar extends RecyclerView.Adapter<ContactAdaptar.ContactV
      public ContactViewHolder(@NonNull View itemView) {
          super(itemView);
      }
- }
+    }
 }
