@@ -1,5 +1,6 @@
 package com.upn.contactsapp.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,15 @@ public class ContactAdaptar extends RecyclerView.Adapter<ContactAdaptar.ContactV
 
         tvName.setText(item.name);
         tvNumber.setText(item.phone);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Intent intent = new Intent(view.getContext(), );
+            }
+        });
+
+
     }
 
     @Override
