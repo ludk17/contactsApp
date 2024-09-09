@@ -1,18 +1,27 @@
 package com.upn.contactsapp.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
+import com.upn.contactsapp.MainActivity;
 import com.upn.contactsapp.R;
 import com.upn.contactsapp.entities.Contact;
 import com.upn.contactsapp.services.ContactService;
+
+import java.security.Permissions;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,11 +31,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CreateContactActivity extends AppCompatActivity {
 
+    ImageView ivPhoto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_contact);
 
+        setUpBtnTakePhoto();
+        setUpBtnChoosePhoto();
+        ivPhoto = findViewById(R.id.ivPhoto);
 
         Button btnGuardarContacto = findViewById(R.id.btnGuardarContacto);
         EditText etName = findViewById(R.id.etName);
@@ -70,14 +84,51 @@ public class CreateContactActivity extends AppCompatActivity {
                     Log.e("MAIN_APP", throwable.getMessage());
                 }
             });
-
-
-
-
-
-
-
         });
 
+    }
+
+    private void setUpBtnChoosePhoto() {
+        Button btnChoosePhoto = findViewById(R.id.btnChoosePhoto);
+        btnChoosePhoto.setOnClickListener(view -> {
+            openPhotoGallery();
+        });
+    }
+
+    private void setUpBtnTakePhoto() {
+        Button btnTakePhoto = findViewById(R.id.btnTakePhoto);
+        btnTakePhoto.setOnClickListener(view -> {
+            // preguntar si tiene permisos para abrir la camara
+            if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                // abrir camara
+                openCamera();
+            } else {
+                requestPermissions(new String[] {Manifest.permission.CAMERA}, 1);
+            }
+        });
+    }
+
+    private void openCamera() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 100);
+    }
+
+    private void openPhotoGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, 101);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            ivPhoto.setImageBitmap(imageBitmap);
+        } if( requestCode == 101) {
+            Uri selectedImage = data.getData();
+            ivPhoto.setImageURI(selectedImage);
+        }
     }
 }

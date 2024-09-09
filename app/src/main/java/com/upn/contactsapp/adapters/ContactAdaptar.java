@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ContactAdaptar extends RecyclerView.Adapter<ContactAdaptar.ContactViewHolder> {
 
-    private List<Contact> data;
+    private final List<Contact> data;
 
     public ContactAdaptar(List<Contact> data) {
         this.data = data;
@@ -48,8 +48,6 @@ public class ContactAdaptar extends RecyclerView.Adapter<ContactAdaptar.ContactV
                 //Intent intent = new Intent(view.getContext(), );
             }
         });
-
-
     }
 
     @Override
@@ -57,7 +55,7 @@ public class ContactAdaptar extends RecyclerView.Adapter<ContactAdaptar.ContactV
         return data.size();
     }
 
-    public class ContactViewHolder extends RecyclerView.ViewHolder {
+    public static class ContactViewHolder extends RecyclerView.ViewHolder {
 
      public ContactViewHolder(@NonNull View itemView) {
          super(itemView);

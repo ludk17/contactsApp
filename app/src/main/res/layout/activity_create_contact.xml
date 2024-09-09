@@ -9,6 +9,34 @@
     android:orientation="vertical"
     tools:context=".activities.CreateContactActivity">
 
+
+  <ImageView
+      android:id="@+id/ivPhoto"
+      android:layout_width="200dp"
+      android:layout_height="200dp"
+      />
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/btnTakePhoto"
+        android:text="Tomar Foto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnChoosePhoto"
+        android:text="Seleccionar Foto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+  </LinearLayout>
+
+
+
   <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
