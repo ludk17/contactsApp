@@ -122,11 +122,11 @@ public class CreateContactActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100) {
+        if (requestCode == 100 && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             ivPhoto.setImageBitmap(imageBitmap);
-        } if( requestCode == 101) {
+        } if( requestCode == 101&& resultCode == RESULT_OK) {
             Uri selectedImage = data.getData();
             ivPhoto.setImageURI(selectedImage);
         }
