@@ -16,12 +16,16 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
+import com.upn.contactsapp.DropboxHelper;
 import com.upn.contactsapp.MainActivity;
 import com.upn.contactsapp.R;
 import com.upn.contactsapp.entities.Contact;
+import com.upn.contactsapp.factories.DropboxClientFactory;
 import com.upn.contactsapp.services.ContactService;
 
+import java.io.InputStream;
 import java.security.Permissions;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -122,13 +126,37 @@ public class CreateContactActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100 && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            ivPhoto.setImageBitmap(imageBitmap);
-        } if( requestCode == 101&& resultCode == RESULT_OK) {
-            Uri selectedImage = data.getData();
-            ivPhoto.setImageURI(selectedImage);
+        try {
+            if (requestCode == 100 && resultCode == RESULT_OK) {
+                Bundle extras = data.getExtras();
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                ivPhoto.setImageBitmap(imageBitmap);
+            }
+            if (requestCode == 101 && resultCode == RESULT_OK) {
+                Uri selectedImage = data.getData();
+                ivPhoto.setImageURI(selectedImage);
+                InputStream inputStream = getContentResolver().openInputStream(selectedImage);
+
+                DropboxClientFactory.init("sl.B9BFhE9dFzMaJEBHHdm8pELcRIUDV0KjR4htnTM0hzzCz_72h8OSgtN5B58vT6f9DayzQlxhkJEoUY-hdMwYMxPm6D0Kvo_jMLpKVONAaSIZx2JRZAM0FzpXyDcxkEYwxtJXYu38ou8caPw");
+
+                // Upload file to Dropbox
+                DropboxHelper dropboxHelper = new DropboxHelper();
+                String filename = selectedImage.getLastPathSegment() + ".jpg";
+                dropboxHelper.uploadFileToDropbox(inputStream, "/" + filename, new DropboxHelper.DropboxCallback() {
+                    @Override
+                    public void onSuccess(String url) {
+                        Log.d("MAIN_APP", "URL: " + url);
+                    }
+
+                    @Override
+                    public void onError(String error) {
+
+                    }
+                });
+
+            }
+        } catch (Exception e) {
+            Log.e("MAIN_APP", Objects.requireNonNull(e.getMessage()));
         }
     }
 }
