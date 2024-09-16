@@ -11,9 +11,9 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/ivPhoto"
             android:layout_width="100dp"
             android:layout_height="100dp"
-
             android:src="@drawable/common_google_signin_btn_text_dark"/>
 
 

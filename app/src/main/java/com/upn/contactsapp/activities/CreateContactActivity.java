@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,8 @@ import com.upn.contactsapp.R;
 import com.upn.contactsapp.entities.Contact;
 import com.upn.contactsapp.services.ContactService;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.security.Permissions;
 
 import retrofit2.Call;
@@ -32,6 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CreateContactActivity extends AppCompatActivity {
 
     ImageView ivPhoto;
+    String imageBase64;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,7 @@ public class CreateContactActivity extends AppCompatActivity {
             String phone = etPhone.getText().toString();
 
             Contact contact = new Contact(name, phone);
+            contact.image = imageBase64;
 
             service.create(contact).enqueue(new Callback<Contact>() {
                 @Override
@@ -125,10 +130,28 @@ public class CreateContactActivity extends AppCompatActivity {
         if (requestCode == 100 && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream .toByteArray();
+            imageBase64 = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
             ivPhoto.setImageBitmap(imageBitmap);
         } if( requestCode == 101&& resultCode == RESULT_OK) {
             Uri selectedImage = data.getData();
             ivPhoto.setImageURI(selectedImage);
+
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                byte[] byteArray = byteArrayOutputStream .toByteArray();
+                imageBase64 = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
         }
     }
 }

@@ -1,9 +1,13 @@
 package com.upn.contactsapp.adapters;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,9 +42,17 @@ public class ContactAdaptar extends RecyclerView.Adapter<ContactAdaptar.ContactV
 
         TextView tvName = view.findViewById(R.id.tvName);
         TextView tvNumber = view.findViewById(R.id.tvNumber);
+        ImageView ivPhoto = view.findViewById(R.id.ivPhoto);
 
         tvName.setText(item.name);
         tvNumber.setText(item.phone);
+
+        byte[] decodedString = Base64.decode(item.image, Base64.DEFAULT);
+        Bitmap imageBM = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+
+        ivPhoto.setImageBitmap(imageBM);
+
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
