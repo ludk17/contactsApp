@@ -137,7 +137,7 @@ public class CreateContactActivity extends AppCompatActivity {
                 ivPhoto.setImageURI(selectedImage);
                 InputStream inputStream = getContentResolver().openInputStream(selectedImage);
 
-                DropboxClientFactory.init("sl.B9BFhE9dFzMaJEBHHdm8pELcRIUDV0KjR4htnTM0hzzCz_72h8OSgtN5B58vT6f9DayzQlxhkJEoUY-hdMwYMxPm6D0Kvo_jMLpKVONAaSIZx2JRZAM0FzpXyDcxkEYwxtJXYu38ou8caPw");
+                DropboxClientFactory.init("");
 
                 // Upload file to Dropbox
                 DropboxHelper dropboxHelper = new DropboxHelper();
