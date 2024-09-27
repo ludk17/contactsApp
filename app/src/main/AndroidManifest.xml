@@ -8,7 +8,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -22,7 +21,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ContactsApp"
         tools:targetApi="31">
+        <activity
+            android:name=".activities.LoginActivity"
+            android:exported="true">
 
+        </activity>
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -41,11 +44,7 @@
         <activity
             android:name=".activities.MapsActivity"
             android:exported="true"
-            android:label="@string/title_activity_maps">
-
-        </activity>
-
-
+            android:label="@string/title_activity_maps"></activity>
         <activity
             android:name=".activities.CreateContactActivity"
             android:exported="false" />
@@ -54,6 +53,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

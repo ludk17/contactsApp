@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.upn.contactsapp.activities.CreateContactActivity;
+import com.upn.contactsapp.activities.LoginActivity;
 import com.upn.contactsapp.adapters.ContactAdaptar;
 import com.upn.contactsapp.entities.Contact;
 import com.upn.contactsapp.services.ContactService;
@@ -35,6 +38,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences sharedPref = getSharedPreferences("com.upn.contactsapp", Context.MODE_PRIVATE);
+        String token = sharedPref.getString("TOKEN", null);
+        Log.i("LoginActivity", "TOKEN: " + token);
+
+        if (token == null) {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://66d5b903f5859a7042673752.mockapi.io")
