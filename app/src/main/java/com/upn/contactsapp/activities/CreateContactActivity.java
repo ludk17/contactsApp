@@ -17,8 +17,10 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
+import com.upn.contactsapp.AppDatabase;
 import com.upn.contactsapp.MainActivity;
 import com.upn.contactsapp.R;
+import com.upn.contactsapp.daos.ContactDAO;
 import com.upn.contactsapp.entities.Contact;
 import com.upn.contactsapp.services.ContactService;
 
@@ -46,6 +48,9 @@ public class CreateContactActivity extends AppCompatActivity {
         setUpBtnChoosePhoto();
         ivPhoto = findViewById(R.id.ivPhoto);
 
+        AppDatabase db = AppDatabase.getInstance(this);
+        ContactDAO contactDAO = db.contactDAO();
+
         Button btnGuardarContacto = findViewById(R.id.btnGuardarContacto);
         EditText etName = findViewById(R.id.etName);
         EditText etPhone = findViewById(R.id.etPhone);
@@ -65,30 +70,37 @@ public class CreateContactActivity extends AppCompatActivity {
             Contact contact = new Contact(name, phone);
             contact.image = imageBase64;
 
-            service.create(contact).enqueue(new Callback<Contact>() {
-                @Override
-                public void onResponse(Call<Contact> call, Response<Contact> response) {
-                    Log.i("MAIN_APP", String.valueOf(response.code()));
+            contact.localId = (int) contactDAO.insert(contact);
 
-                    if (response.isSuccessful()) {
+            Log.i("CONTACT_LOCAL_ID",  String.valueOf(contact.localId));
 
-                        Contact newContact = response.body();
-
-                        Intent intent = getIntent();
-                        intent.putExtra("CONTACT", new Gson().toJson(newContact));
-
-                        setResult(100, intent);
-                        finish();
-
-                    }
-
-                }
-
-                @Override
-                public void onFailure(Call<Contact> call, Throwable throwable) {
-                    Log.e("MAIN_APP", throwable.getMessage());
-                }
-            });
+//            service.create(contact).enqueue(new Callback<Contact>() {
+//                @Override
+//                public void onResponse(Call<Contact> call, Response<Contact> response) {
+//                    Log.i("MAIN_APP", String.valueOf(response.code()));
+//
+//                    if (response.isSuccessful()) {
+//
+//                        Contact newContact = response.body();
+//
+//                        Intent intent = getIntent();
+//                        intent.putExtra("CONTACT", new Gson().toJson(newContact));
+//
+//                        contact.id = newContact.id;
+//                        contactDAO.update(contact.localId, newContact.id);
+//
+//                        setResult(100, intent);
+//                        finish();
+//
+//                    }
+//
+//                }
+//
+//                @Override
+//                public void onFailure(Call<Contact> call, Throwable throwable) {
+//                    Log.e("MAIN_APP", throwable.getMessage());
+//                }
+//            });
         });
 
     }

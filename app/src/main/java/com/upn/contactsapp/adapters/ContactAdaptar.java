@@ -47,11 +47,9 @@ public class ContactAdaptar extends RecyclerView.Adapter<ContactAdaptar.ContactV
         tvName.setText(item.name);
         tvNumber.setText(item.phone);
 
-        byte[] decodedString = Base64.decode(item.image, Base64.DEFAULT);
-        Bitmap imageBM = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-
-
-        ivPhoto.setImageBitmap(imageBM);
+//        byte[] decodedString = Base64.decode(item.image, Base64.DEFAULT);
+//        Bitmap imageBM = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+//        ivPhoto.setImageBitmap(imageBM);
 
 
         view.setOnClickListener(new View.OnClickListener() {

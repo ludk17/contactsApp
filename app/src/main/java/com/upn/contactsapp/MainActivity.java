@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.upn.contactsapp.activities.CreateContactActivity;
 import com.upn.contactsapp.activities.LoginActivity;
 import com.upn.contactsapp.adapters.ContactAdaptar;
+import com.upn.contactsapp.daos.ContactDAO;
 import com.upn.contactsapp.entities.Contact;
 import com.upn.contactsapp.services.ContactService;
 
@@ -50,6 +51,15 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+
+        AppDatabase db = AppDatabase.getInstance(this);
+        ContactDAO contactDAO = db.contactDAO();
+
+
+        List<Contact> contacts = contactDAO.getAll();
+        elementos.addAll(contacts);
+
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://66d5b903f5859a7042673752.mockapi.io")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -64,8 +74,17 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("MAIN_APP", String.valueOf(response.code()));
                 if (response.isSuccessful()){
                     //elementos = response.body();
+                    elementos.clear();
                     elementos.addAll(response.body());
                     adaptar.notifyDataSetChanged();
+
+                    for(Contact contact: response.body()) {
+                        Contact localContact = contactDAO.findRemote(contact.id);
+                        if (localContact == null) {
+                            contactDAO.insert(contact);
+                        }
+                    }
+
                 }
                 // aca puedo trabajar con el resultado
             }
@@ -82,8 +101,35 @@ public class MainActivity extends AppCompatActivity {
         btnCreateContact.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, CreateContactActivity.class);
             startActivityForResult(intent, 100);
-
         });
+
+        Log.i("MAIN_APP", new Gson().toJson(contacts));
+
+        for (Contact contact: contacts) {
+            if (contact.id != 0) continue;
+            service.create(contact).enqueue(new Callback<Contact>() {
+                @Override
+                public void onResponse(Call<Contact> call, Response<Contact> response) {
+                    Log.i("MAIN_APP", String.valueOf(response.code()));
+
+                    if (response.isSuccessful()) {
+
+                        Contact newContact = response.body();
+
+                        Intent intent = getIntent();
+                        intent.putExtra("CONTACT", new Gson().toJson(newContact));
+                        contactDAO.update(contact.localId, newContact.id);
+
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<Contact> call, Throwable throwable) {
+                    Log.e("MAIN_APP", throwable.getMessage());
+                }
+            });
+        }
 
     }
 
