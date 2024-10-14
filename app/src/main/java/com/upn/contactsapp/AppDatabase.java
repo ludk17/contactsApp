@@ -21,6 +21,9 @@ public abstract class AppDatabase extends RoomDatabase {
             dbInstance = Room.databaseBuilder(context, AppDatabase.class, "database-contacts")
                     .allowMainThreadQueries()
                     .build();
+
+
+
         }
         return dbInstance;
     }
