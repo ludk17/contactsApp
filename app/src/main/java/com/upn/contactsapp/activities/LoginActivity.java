@@ -70,6 +70,9 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<List<User>> call, Throwable t) {
                     Log.d("LoginActivity", "Error: " + t.getMessage());
+                    Log.d("LoginActivity", "Error: " + t.getMessage());
+                    Log.d("LoginActivity", "Error: " + t.getMessage());
+
                 }
             });
 
