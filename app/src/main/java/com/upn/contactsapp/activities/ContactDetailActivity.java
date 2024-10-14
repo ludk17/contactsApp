@@ -14,5 +14,6 @@ public class ContactDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_detail);
 
+        // Se modifico en semana 10-1
     }
 }
