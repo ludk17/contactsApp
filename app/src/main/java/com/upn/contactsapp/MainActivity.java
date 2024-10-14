@@ -1,5 +1,4 @@
 package com.upn.contactsapp;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,7 +30,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-
     List<Contact> elementos = new ArrayList<>();
     ContactAdaptar adaptar;
 
@@ -49,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
             return;
+
+
+
+            
         }
 
 
