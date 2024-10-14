@@ -39,7 +39,6 @@ public class IssueActivity extends AppCompatActivity {
             return;
         }
 
-
         Retrofit retrofit = JiraAPIClient.getInstance(this);
         IssueService service = retrofit.create(IssueService.class);
 
@@ -48,6 +47,8 @@ public class IssueActivity extends AppCompatActivity {
             public void onResponse(Call<IssueResponse> call, Response<IssueResponse> response) {
 
                 Log.i("MAIN_APP", String.valueOf(response.code()));
+                Log.i("MAIN_APP", new Gson().toJson(response.body()));
+                Log.i("MAIN_APP", new Gson().toJson(response.body()));
                 Log.i("MAIN_APP", new Gson().toJson(response.body()));
             }
 
