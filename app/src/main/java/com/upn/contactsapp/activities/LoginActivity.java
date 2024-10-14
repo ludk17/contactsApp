@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("LoginActivity", "Usuario no encontrado");
                         return;
                     }
-
                     Log.d("LoginActivity", "Usuario encontrado autenticado");
                     // authenticarme
 
