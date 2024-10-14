@@ -111,6 +111,11 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Contact> call, Response<Contact> response) {
                     Log.i("MAIN_APP", String.valueOf(response.code()));
+                    Log.i("MAIN_APP", String.valueOf(response.code()));
+                    Log.i("MAIN_APP", String.valueOf(response.code()));
+                    Log.i("MAIN_APP", String.valueOf(response.code()));
+                    Log.i("MAIN_APP", String.valueOf(response.code()));
+
 
                     if (response.isSuccessful()) {
 
