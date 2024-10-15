@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
      @Override
      protected void onActivityResult(int requestCode, int resultCode, Intent data) {
          super.onActivityResult(requestCode, resultCode, data);
@@ -146,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
          }
 
      }
+
 
     private void setUpRecyclerView() {
         RecyclerView rvContacts = findViewById(R.id.rvContacts);

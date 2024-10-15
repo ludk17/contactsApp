@@ -11,8 +11,8 @@ import com.upn.contactsapp.entities.Contact;
 
 @Database(entities = {Contact.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
-
     private static AppDatabase dbInstance;
+
 
     public abstract ContactDAO contactDAO();
 
