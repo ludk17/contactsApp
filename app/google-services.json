@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "377423878645",
+    "firebase_url": "https://prueba1-4fcc8-default-rtdb.firebaseio.com",
+    "project_id": "prueba1-4fcc8",
+    "storage_bucket": "prueba1-4fcc8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377423878645:android:38ce3b3351c1286d34a8bc",
+        "android_client_info": {
+          "package_name": "com.upn.contactsap"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHfKMlka9Zvx0X1HILeGvjxuGCF3aTUvY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377423878645:android:ace10a6461cb004734a8bc",
+        "android_client_info": {
+          "package_name": "com.upn.contactsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHfKMlka9Zvx0X1HILeGvjxuGCF3aTUvY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
