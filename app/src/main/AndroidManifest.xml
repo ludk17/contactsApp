@@ -33,7 +33,7 @@
 
         <activity
             android:name=".activities.CrearComentarioActivity"
-            android:exported="true" >
+            android:exported="false" >
 
         </activity>
 
