@@ -29,9 +29,7 @@ public class FirebaseActivity extends AppCompatActivity {
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference("contacts");
 
-           // myRef.setValue("Hello, World!");
 
-            //Contact c1
             Contact c1 = new Contact("Luis","123456");
             c1.uuid = UUID.randomUUID().toString();
             Contact c2 = new Contact("Miguel","123456");
