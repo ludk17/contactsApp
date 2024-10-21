@@ -33,7 +33,6 @@ public class LoginActivity extends AppCompatActivity {
         String token = sharedPref.getString("TOKEN", null);
         Log.i("LoginActivity", "TOKEN: " + token);
 
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://66d5b903f5859a7042673752.mockapi.io")
                 .addConverterFactory(GsonConverterFactory.create())

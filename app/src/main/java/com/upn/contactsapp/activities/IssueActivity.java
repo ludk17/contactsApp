@@ -39,7 +39,6 @@ public class IssueActivity extends AppCompatActivity {
             return;
         }
 
-
         Retrofit retrofit = JiraAPIClient.getInstance(this);
         IssueService service = retrofit.create(IssueService.class);
 
