@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "611880673574",
+    "firebase_url": "https://vdj2024-2-538df-default-rtdb.firebaseio.com",
+    "project_id": "vdj2024-2-538df",
+    "storage_bucket": "vdj2024-2-538df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:611880673574:android:c02166cf8bde145288a1e7",
+        "android_client_info": {
+          "package_name": "com.upn.contacts.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRMP5NRKqgfZCBiI69kUJTIVO9Bmok5Yc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:611880673574:android:c209a3fed7ec5d1c88a1e7",
+        "android_client_info": {
+          "package_name": "com.upn.contactsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRMP5NRKqgfZCBiI69kUJTIVO9Bmok5Yc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

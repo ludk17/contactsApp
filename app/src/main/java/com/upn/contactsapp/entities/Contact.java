@@ -4,8 +4,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.upn.contactsapp.IService;
-
 @Entity(tableName = "contacts")
 public class Contact {
 
@@ -24,8 +22,19 @@ public class Contact {
     @ColumnInfo(name = "image_path")
     public String imagePath;
 
+    // Constructor de la clase Contact
     public Contact(String name, String phone) {
         this.name = name;
         this.phone = phone;
+    }
+
+    // Método para asignar un ID
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    // Método para obtener el ID
+    public int getId() {
+        return id;
     }
 }
