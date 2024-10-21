@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "331653369054",
+    "project_id": "dam2024-2",
+    "storage_bucket": "dam2024-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:331653369054:android:32108d6ba316e70741c64f",
+        "android_client_info": {
+          "package_name": "com.upn.contactsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCh567rgymHaOVWkcwlUiGfBR4qJU1E3sE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
