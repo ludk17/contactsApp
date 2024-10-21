@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "456283343433",
+    "project_id": "pruebafirebase-7c5ea",
+    "storage_bucket": "pruebafirebase-7c5ea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456283343433:android:77fe2eedd12230b035cd98",
+        "android_client_info": {
+          "package_name": "com.upn.contactsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATuNVUnawkJy0xoh-b-AGgXwNUQ8xySEA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
