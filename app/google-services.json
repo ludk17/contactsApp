@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "663626431332",
+    "project_id": "dqv2309-bf9ab",
+    "storage_bucket": "dqv2309-bf9ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663626431332:android:c366597313708644b25871",
+        "android_client_info": {
+          "package_name": "com.upn.contactsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYHTnBCe6P4s1atu9IYKGR1QtgD6bC9KQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
