@@ -30,7 +30,7 @@ public class FirebaseActivity extends AppCompatActivity {
             Contact c2 = new Contact("Carlos","123456");
             c2.id=2;
             Contact c3 = new Contact("Marcos","1234568");
-            c2.id=3;
+            c3.id=3;
 
             myRef.child(String .valueOf(c1.id)).setValue(c1);
             myRef.child(String .valueOf(c2.id)).setValue(c2);
