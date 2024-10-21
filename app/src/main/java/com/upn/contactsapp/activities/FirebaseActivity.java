@@ -26,7 +26,7 @@ public class FirebaseActivity extends AppCompatActivity {
 
             Contact c1 = new Contact("Juan","123456");
             c1.id=1;
-            Contact c2 = new Contact("Pedro","1234576");
+            Contact c2 = new Contact("Pedro","1255534576");
             c2.id=2;
 
             myRef.child(String .valueOf(c1.id)).setValue(c1);
