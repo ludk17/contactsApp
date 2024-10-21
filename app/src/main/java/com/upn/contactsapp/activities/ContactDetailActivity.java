@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.upn.contactsapp.R;
+import com.upn.contactsapp.entities.Contact;
 
 public class ContactDetailActivity extends AppCompatActivity {
 
@@ -13,6 +14,8 @@ public class ContactDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_detail);
+
+        Contact contact;
 
     }
 }
