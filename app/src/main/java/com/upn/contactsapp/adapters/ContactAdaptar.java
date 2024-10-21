@@ -34,6 +34,7 @@ public class ContactAdaptar extends RecyclerView.Adapter<ContactAdaptar.ContactV
         return new ContactViewHolder(view);
     }
 
+    //OnBindViewHolder
     @Override
     public void onBindViewHolder(@NonNull ContactViewHolder holder, int position) {
         View view = holder.itemView;
