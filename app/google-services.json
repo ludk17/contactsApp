@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "225890056815",
+    "firebase_url": "https://sem11-b3172-default-rtdb.firebaseio.com",
+    "project_id": "sem11-b3172",
+    "storage_bucket": "sem11-b3172.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:225890056815:android:9c559c4a48b6d760c16b9a",
+        "android_client_info": {
+          "package_name": "com.upm.contactsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdpCfNQ_E4DtDGCu95YXG7JNg8UAdaxFI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:225890056815:android:3b57b050502cc4b3c16b9a",
+        "android_client_info": {
+          "package_name": "com.upn.contactsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdpCfNQ_E4DtDGCu95YXG7JNg8UAdaxFI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
