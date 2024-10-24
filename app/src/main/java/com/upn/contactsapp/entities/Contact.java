@@ -9,6 +9,7 @@ import com.upn.contactsapp.IService;
 @Entity(tableName = "contacts")
 public class Contact {
 
+    public String uuid;
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "local_id")
     transient public int localId;
