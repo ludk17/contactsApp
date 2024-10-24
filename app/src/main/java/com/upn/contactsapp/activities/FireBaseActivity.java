@@ -24,6 +24,16 @@ public class FireBaseActivity extends AppCompatActivity {
         //EdgeToEdge.enable(this);
         setContentView(R.layout.activity_firebase);
 
-buton boton = find
+        Button boton = findViewById(R.id.btnFirebase);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("contact");
+        Contact contacto = new Contact("contacto","123456789");
+        boton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myRef. child("1").setValue(contacto);
+
+            }
+        });
     }
 }

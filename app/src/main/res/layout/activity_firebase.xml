@@ -9,9 +9,10 @@
     tools:context=".activities.LoginActivity">
 
 
+
     <Button
-        android:id="@+id/database"
-        android:text="database"
+        android:id="@+id/btnFirebase"
+        android:text="Iniciar Sesieøn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
